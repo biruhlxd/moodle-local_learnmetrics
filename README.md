@@ -2,7 +2,7 @@
 
 Learning analytics for Moodle 5.0–5.3 that run entirely inside Moodle: learning time, dashboards and ready-to-use reports, built on Moodle's own Report builder. No data leaves the site.
 
-**LearnMetrics Pro** (`local_learnmetricspro`, sold separately with a yearly licence per site) adds scheduled PDF reports by email, compliance tracking with reminders, at-risk alerts, the dashboards of a teacher's courses, an engagement score, the comparison of cohorts, departments and categories, and downloads of every dashboard table. It plugs into the hooks of LearnMetrics (see *Extending*).
+Other plugins can add to the dashboards, the learning progress page and the reports through the hooks of LearnMetrics (see *Extending*).
 
 ## What it does
 
@@ -55,7 +55,7 @@ Settings: Site administration → Plugins → Local plugins → LearnMetrics (se
 
 ## Upgrading from before 1.0
 
-Up to 0.18, LearnMetrics included the features that are now in LearnMetrics Pro. Upgrading to 1.0 keeps their data in the database, unused: install LearnMetrics Pro at the same time to keep using them, and it takes the data over (schedules, compliance requirements, reminders and statuses, alerts, engagement scores, the alert settings and the role permissions of the moved capabilities).
+Up to 0.18, LearnMetrics also included scheduled reports, compliance tracking, at-risk alerts, the dashboards of a teacher's courses, the engagement score, the comparison of groups and the dashboard downloads. Upgrading to 1.0 keeps their data in the database, unused, so that a plugin providing those features can take it over (schedules, compliance requirements, reminders and statuses, alerts, engagement scores, the alert settings and the role permissions of the moved capabilities).
 
 ## Development
 
