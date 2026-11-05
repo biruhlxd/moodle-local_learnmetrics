@@ -1,0 +1,7 @@
+# Development files that do not belong in the installable plugin zip.
+.github export-ignore
+.gitattributes export-ignore
+.devcontainer export-ignore
+
+# Scripts run in Linux codespaces.
+*.sh text eol=lf

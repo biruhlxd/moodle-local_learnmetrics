@@ -1,0 +1,89 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_learnmetrics/completion_grid
+
+    Activity completion of a course: the learners by the activities with completion tracking.
+
+    Example context (json):
+    {
+        "hasactivities": true,
+        "haslearners": true,
+        "completionenabled": true,
+        "activities": [{"cmid": 4, "name": "Welcome", "completed": 3, "percent": 75}],
+        "learners": [{"fullname": "Ada Lovelace", "userurl": "#", "percent": 100,
+            "cells": [{"symbol": "✓", "label": "Completed", "class": "text-success"}]}],
+        "learnercount": 4,
+        "groupsonly": false,
+        "paging": "",
+        "download": "",
+        "backurl": "#"
+    }
+}}
+<div class="local-learnmetrics">
+    <p class="text-muted">{{#str}} activitycompletion_desc, local_learnmetrics {{/str}}</p>
+    {{#groupsonly}}
+    <div class="alert alert-info" role="status">{{#str}} yourgroupsonly, local_learnmetrics {{/str}}</div>
+    {{/groupsonly}}
+    {{^completionenabled}}
+    <div class="alert alert-info">{{#str}} completionnotenabled, local_learnmetrics {{/str}}</div>
+    {{/completionenabled}}
+    {{#completionenabled}}
+    {{^hasactivities}}
+    <div class="alert alert-info">{{#str}} nocompletionactivities, local_learnmetrics {{/str}}</div>
+    {{/hasactivities}}
+    {{/completionenabled}}
+    {{#hasactivities}}
+    {{^haslearners}}
+    <div class="alert alert-info">{{#str}} nolearners, local_learnmetrics {{/str}}</div>
+    {{/haslearners}}
+    {{#haslearners}}
+    <p>{{#str}} learnercount, local_learnmetrics, {{learnercount}} {{/str}}</p>
+    <div class="table-responsive mb-3">
+        <table class="table table-sm table-bordered local-learnmetrics-completiongrid">
+            <caption class="visually-hidden">{{#str}} activitycompletion, local_learnmetrics {{/str}}</caption>
+            <thead>
+                <tr>
+                    <th scope="col">{{#str}} learner, local_learnmetrics {{/str}}</th>
+                    <th scope="col" class="text-center">{{#str}} progresspercent, local_learnmetrics {{/str}}</th>
+                    {{#activities}}
+                    <th scope="col" class="text-center">
+                        <div>{{name}}</div>
+                        <div class="small text-muted">{{#str}} completedpercent, local_learnmetrics, {{percent}} {{/str}}</div>
+                    </th>
+                    {{/activities}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#learners}}
+                <tr>
+                    <th scope="row"><a href="{{userurl}}">{{fullname}}</a></th>
+                    <td class="text-center">{{percent}}%</td>
+                    {{#cells}}
+                    <td class="text-center {{class}}"><span aria-hidden="true">{{symbol}}</span><span class="visually-hidden">{{label}}</span></td>
+                    {{/cells}}
+                </tr>
+                {{/learners}}
+            </tbody>
+        </table>
+    </div>
+    {{{paging}}}
+    <div class="mb-4">{{{download}}}</div>
+    {{/haslearners}}
+    {{/hasactivities}}
+    <p><a href="{{backurl}}">{{#str}} backtodashboard, local_learnmetrics {{/str}}</a></p>
+</div>

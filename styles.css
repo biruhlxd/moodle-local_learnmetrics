@@ -1,0 +1,17 @@
+/* Filters of the dashboards: on a narrow screen, a select with long options shrinks to the screen. */
+.local-learnmetrics form.d-flex > div {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.local-learnmetrics .form-select {
+    max-width: 100%;
+}
+
+/* Activity completion: the learner column stays in view while the activities scroll. */
+.local-learnmetrics-completiongrid th[scope="row"] {
+    position: sticky;
+    left: 0;
+    background-color: var(--bs-body-bg, #fff);
+    white-space: nowrap;
+}

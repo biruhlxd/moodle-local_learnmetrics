@@ -1,0 +1,175 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_learnmetrics/dashboard
+
+    Site dashboard of learning activity.
+
+    Example context (json):
+    {
+        "formurl": "#",
+        "periods": [{"value": 30, "name": "Last 30 days", "selected": true}],
+        "categories": [{"value": 0, "name": "All categories", "selected": true}],
+        "cohorts": [{"value": 0, "name": "All cohorts", "selected": true}],
+        "cards": [{"label": "Active learners", "value": 42, "url": "#"}, {"label": "Learning hours", "value": "12.5"}],
+        "charts": [{"chart": "", "wide": true}],
+        "hastopcourses": true,
+        "topcourses": [{"fullname": "Course 1", "courseurl": "#", "hours": "12.5", "learners": 3, "learnersurl": "#"}],
+        "hasattention": true,
+        "attention": [{"fullname": "Ada Lovelace", "userurl": "#", "coursename": "Course 1", "courseurl": "#",
+            "lastactivity": "Never", "timespent": "-"}],
+        "inactivedays": 14,
+        "notyetprocessed": false,
+        "reportbuilderurl": "#",
+        "footers": {"trend": ""},
+        "sections": [],
+        "links": [{"url": "#", "text": "Compliance"}]
+    }
+}}
+<div class="local-learnmetrics">
+    {{#notyetprocessed}}
+    <div class="alert alert-info" role="status">{{#str}} notyetprocessed, local_learnmetrics {{/str}}</div>
+    {{/notyetprocessed}}
+
+    <form method="get" action="{{formurl}}" class="d-flex flex-wrap align-items-end gap-3 mb-4">
+        <div>
+            <label for="local-learnmetrics-days" class="form-label">{{#str}} period, local_learnmetrics {{/str}}</label>
+            <select id="local-learnmetrics-days" name="days" class="form-select">
+                {{#periods}}<option value="{{value}}" {{#selected}}selected{{/selected}}>{{name}}</option>{{/periods}}
+            </select>
+        </div>
+        <div>
+            <label for="local-learnmetrics-category" class="form-label">{{#str}} category {{/str}}</label>
+            <select id="local-learnmetrics-category" name="category" class="form-select">
+                {{#categories}}<option value="{{value}}" {{#selected}}selected{{/selected}}>{{name}}</option>{{/categories}}
+            </select>
+        </div>
+        <div>
+            <label for="local-learnmetrics-cohort" class="form-label">{{#str}} cohort, cohort {{/str}}</label>
+            <select id="local-learnmetrics-cohort" name="cohort" class="form-select">
+                {{#cohorts}}<option value="{{value}}" {{#selected}}selected{{/selected}}>{{name}}</option>{{/cohorts}}
+            </select>
+        </div>
+        {{#hasdepartments}}
+        <div>
+            <label for="local-learnmetrics-department" class="form-label">{{departmentlabel}}</label>
+            <select id="local-learnmetrics-department" name="department" class="form-select">
+                {{#departments}}<option value="{{value}}" {{#selected}}selected{{/selected}}>{{name}}</option>{{/departments}}
+            </select>
+        </div>
+        {{/hasdepartments}}
+        <button type="submit" class="btn btn-primary">{{#str}} apply, local_learnmetrics {{/str}}</button>
+    </form>
+
+    <div class="row g-3 mb-4">
+        {{#cards}}
+        <div class="col-6 col-md-4 col-xl">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="small text-muted">{{label}}</div>
+                    <div class="fs-3 fw-bold">
+                        {{#url}}
+                        <a href="{{url}}" class="stretched-link text-reset"
+                            title="{{#str}} viewlearners, local_learnmetrics {{/str}}">{{value}}</a>
+                        {{/url}}
+                        {{^url}}{{value}}{{/url}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/cards}}
+    </div>
+
+    <div class="row g-3 mb-4">
+        {{#charts}}
+        {{#chart}}
+        <div class="{{#wide}}col-12{{/wide}}{{^wide}}col-12 col-lg-6{{/wide}}">
+            <div class="card h-100"><div class="card-body">{{{chart}}}</div></div>
+        </div>
+        {{/chart}}
+        {{/charts}}
+    </div>
+    {{#footers.trend}}<div class="mb-4">{{{footers.trend}}}</div>{{/footers.trend}}
+
+    {{#hastopcourses}}
+    <h3 class="h4">{{#str}} chart_topcourses, local_learnmetrics {{/str}}</h3>
+    <div class="table-responsive mb-4">
+        <table class="table table-striped">
+            <caption class="visually-hidden">{{#str}} chart_topcourses, local_learnmetrics {{/str}}</caption>
+            <thead>
+                <tr>
+                    <th scope="col">{{#str}} course {{/str}}</th>
+                    <th scope="col">{{#str}} learninghours, local_learnmetrics {{/str}}</th>
+                    <th scope="col">{{#str}} activelearners, local_learnmetrics {{/str}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#topcourses}}
+                <tr>
+                    <td><a href="{{courseurl}}">{{fullname}}</a></td>
+                    <td>{{hours}}</td>
+                    <td><a href="{{learnersurl}}" title="{{#str}} viewlearners, local_learnmetrics {{/str}}">{{learners}}</a></td>
+                </tr>
+                {{/topcourses}}
+            </tbody>
+        </table>
+    </div>
+    {{#footers.courses}}<div class="mb-4">{{{footers.courses}}}</div>{{/footers.courses}}
+    {{/hastopcourses}}
+
+    <h3 class="h4">{{#str}} needingattention, local_learnmetrics {{/str}}</h3>
+    <p class="text-muted">{{#str}} needingattention_desc, local_learnmetrics, {{inactivedays}} {{/str}}</p>
+    {{#hasattention}}
+    <div class="table-responsive mb-4">
+        <table class="table table-striped">
+            <caption class="visually-hidden">{{#str}} needingattention, local_learnmetrics {{/str}}</caption>
+            <thead>
+                <tr>
+                    <th scope="col">{{#str}} learner, local_learnmetrics {{/str}}</th>
+                    <th scope="col">{{#str}} course {{/str}}</th>
+                    <th scope="col">{{#str}} lastactivity, local_learnmetrics {{/str}}</th>
+                    <th scope="col">{{#str}} timespent, local_learnmetrics {{/str}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#attention}}
+                <tr>
+                    <td><a href="{{userurl}}">{{fullname}}</a></td>
+                    <td><a href="{{courseurl}}">{{coursename}}</a></td>
+                    <td>{{lastactivity}}</td>
+                    <td>{{timespent}}</td>
+                </tr>
+                {{/attention}}
+            </tbody>
+        </table>
+    </div>
+    {{#footers.attention}}<div class="mb-4">{{{footers.attention}}}</div>{{/footers.attention}}
+    {{/hasattention}}
+    {{^hasattention}}
+    <div class="alert alert-success">{{#str}} noneneedingattention, local_learnmetrics {{/str}}</div>
+    {{/hasattention}}
+
+    {{#sections}}{{{.}}}{{/sections}}
+
+    <p>
+        {{#str}} buildyourown, local_learnmetrics {{/str}}
+        <a href="{{reportbuilderurl}}">{{#str}} customreports, core_reportbuilder {{/str}}</a>
+    </p>
+    {{#links}}
+    <p><a href="{{url}}">{{text}}</a></p>
+    {{/links}}
+</div>
