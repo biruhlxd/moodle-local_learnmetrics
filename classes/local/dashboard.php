@@ -330,7 +330,8 @@ class dashboard {
             $limit
         );
         foreach ($rows as $row) {
-            $row->fullname = format_string($row->fullname, true, ['context' => \context_course::instance($row->id)]);
+            $row->fullname = format_string($row->fullname, true, ['context' => \context_course::instance($row->id),
+                'escape' => false]);
             $row->hours = round($row->seconds / HOURSECS, 1);
         }
         return array_values($rows);
@@ -421,7 +422,8 @@ class dashboard {
         );
         foreach ($rows as $row) {
             $row->fullname = fullname($row);
-            $row->coursename = format_string($row->coursename, true, ['context' => \context_course::instance($row->courseid)]);
+            $row->coursename = format_string($row->coursename, true, ['context' => \context_course::instance($row->courseid),
+                'escape' => false]);
         }
         return array_values($rows);
     }

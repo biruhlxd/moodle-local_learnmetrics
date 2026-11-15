@@ -1,5 +1,9 @@
 # Changes
 
+## 1.1.1 (2026-11-15)
+
+- Fixed: names with an ampersand, such as "Health & Safety", were shown as "Health &amp;amp; Safety" on the dashboards, the completion grid, the learning progress page, in the filters and in downloads. This applies to the names of courses, activities, categories, cohorts and the department field.
+
 ## 1.0.0 (2026-11-10)
 
 - Scheduled reports, compliance, at-risk alerts, the dashboards of a teacher's courses, the engagement score, the comparison of groups and the downloads of the dashboard tables are no longer part of this plugin. Other plugins can add such features through the hooks of LearnMetrics.

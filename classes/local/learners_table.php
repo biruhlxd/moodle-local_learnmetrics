@@ -89,10 +89,11 @@ class learners_table extends sql_table {
         if ($row->courseid == SITEID) {
             return get_string('outsidecourses', 'local_learnmetrics');
         }
-        $name = format_string($row->coursename, true, ['context' => \context_course::instance($row->courseid)]);
+        $context = \context_course::instance($row->courseid);
         if ($this->is_downloading()) {
-            return $name;
+            return format_string($row->coursename, true, ['context' => $context, 'escape' => false]);
         }
+        $name = format_string($row->coursename, true, ['context' => $context]);
         return html_writer::link(new moodle_url('/course/view.php', ['id' => $row->courseid]), $name);
     }
 

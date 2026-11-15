@@ -107,6 +107,24 @@ final class my_progress_test extends \advanced_testcase {
         $this->assertNull($courses[0]->progress);
     }
 
+    public function test_course_name_with_ampersand(): void {
+        global $DB, $OUTPUT, $PAGE;
+        $DB->set_field('course', 'fullname', 'Health & Safety', ['id' => $this->courses['safety']->id]);
+        rebuild_course_cache($this->courses['safety']->id, true);
+        $this->setUser($this->users['ann']);
+        $courses = (new my_progress($this->users['ann']->id, 30, $this->now))->get_courses();
+        // Not escaped here: the template escapes it.
+        $this->assertSame('Health & Safety', $courses[0]->fullname);
+
+        $PAGE->set_url('/local/learnmetrics/my.php');
+        $html = $OUTPUT->render_from_template('local_learnmetrics/my_progress', [
+            'courses' => [['fullname' => $courses[0]->fullname, 'url' => '#']],
+            'hascourses' => true,
+        ]);
+        $this->assertStringContainsString('Health &amp; Safety', $html);
+        $this->assertStringNotContainsString('&amp;amp;', $html);
+    }
+
     public function test_who_can_see_progress(): void {
         $ann = $this->users['ann']->id;
 

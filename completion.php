@@ -60,7 +60,7 @@ if ($dataformat) {
     }
     \core\session\manager::write_close();
     $filename = clean_filename(get_string('activitycompletion', 'local_learnmetrics') . '-'
-        . format_string($course->shortname, true, ['context' => $context]) . '-' . date('Y-m-d'));
+        . format_string($course->shortname, true, ['context' => $context, 'escape' => false]) . '-' . date('Y-m-d'));
     \core\dataformat::download_data($filename, $dataformat, $columns, $rows);
     die;
 }

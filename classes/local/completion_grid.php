@@ -139,7 +139,7 @@ class completion_grid {
             $completed = count(array_filter($states, fn($bycm) => ($bycm[$cmid] ?? null) === self::STATE_COMPLETE));
             $columns[] = (object)[
                 'cmid' => $cmid,
-                'name' => $cm->get_formatted_name(),
+                'name' => $cm->get_formatted_name(['escape' => false]),
                 'completed' => $completed,
                 'percent' => $count ? (int)round(100 * $completed / $count) : 0,
             ];

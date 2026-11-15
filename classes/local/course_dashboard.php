@@ -106,7 +106,7 @@ class course_dashboard extends dashboard {
             }
             $activities[] = (object)[
                 'cmid' => (int)$cm->id,
-                'name' => $cm->get_formatted_name(),
+                'name' => $cm->get_formatted_name(['escape' => false]),
                 'modname' => $cm->modname,
                 'modfullname' => $cm->get_module_type_name(),
                 'iconurl' => $cm->get_icon_url(),
@@ -193,7 +193,7 @@ class course_dashboard extends dashboard {
             }
             $packages[] = (object)[
                 'cmid' => (int)$cm->id,
-                'name' => $cm->get_formatted_name(),
+                'name' => $cm->get_formatted_name(['escape' => false]),
                 'url' => $cm->url,
                 'learners' => $learners,
                 'attempts' => count($mine),
