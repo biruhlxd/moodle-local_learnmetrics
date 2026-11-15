@@ -146,7 +146,7 @@ class my_progress {
             $progress = \core_completion\progress::get_course_progress_percentage($course, $this->userid);
             $rows[] = (object)[
                 'id' => (int)$course->id,
-                'fullname' => format_string($course->fullname, true, ['context' => $context]),
+                'fullname' => format_string($course->fullname, true, ['context' => $context, 'escape' => false]),
                 'progress' => $progress === null ? null : (int)floor($progress),
                 'timecompleted' => (int)($completions[$course->id] ?? 0),
                 'timespent' => (int)($times[$course->id]->timespent ?? 0),

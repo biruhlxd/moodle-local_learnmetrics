@@ -353,7 +353,12 @@ final class time_tracker_test extends \advanced_testcase {
         $this->assertEquals([5 * MINSECS, 21 * MINSECS], array_column($views, 'timespent'));
 
         // Deleting an activity deletes its time.
-        course_delete_module($page->cmid);
+        if (method_exists(\core_courseformat\local\cmactions::class, 'delete')) {
+            \core_courseformat\formatactions::cm($course->id)->delete($page->cmid);
+        } else {
+            // Moodle 5.0 and 5.1.
+            course_delete_module($page->cmid);
+        }
         $this->assertFalse($DB->record_exists('local_learnmetrics_cmtime', ['cmid' => $page->cmid]));
     }
 }

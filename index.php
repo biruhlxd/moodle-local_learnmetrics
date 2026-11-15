@@ -53,12 +53,14 @@ foreach (dashboard::PERIODS as $period) {
 }
 $categories = [['value' => 0, 'name' => get_string('allcategories', 'local_learnmetrics'), 'selected' => !$categoryid]];
 foreach (core_course_category::make_categories_list('moodle/category:viewcourselist') as $id => $name) {
-    $categories[] = ['value' => $id, 'name' => $name, 'selected' => $id == $categoryid];
+    // The list has escaped names, and the template escapes them.
+    $categories[] = ['value' => $id, 'name' => core_text::entities_to_utf8($name), 'selected' => $id == $categoryid];
 }
 $cohorts = [['value' => 0, 'name' => get_string('allcohorts', 'local_learnmetrics'), 'selected' => !$cohortid]];
 foreach ($DB->get_records('cohort', null, 'name', 'id, name, contextid') as $cohort) {
     $cohorts[] = ['value' => $cohort->id, 'selected' => $cohort->id == $cohortid,
-        'name' => format_string($cohort->name, true, ['context' => context::instance_by_id($cohort->contextid)])];
+        'name' => format_string($cohort->name, true, ['context' => context::instance_by_id($cohort->contextid),
+            'escape' => false])];
 }
 
 $departmentfield = department::get_field();

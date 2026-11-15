@@ -51,7 +51,11 @@ class department {
         $fields = $DB->get_records_select('user_info_field', "datatype $insql", $params, 'sortorder', 'id, shortname, name');
         $context = \context_system::instance();
         foreach ($fields as $field) {
-            $options[self::PROFILE_PREFIX . $field->shortname] = format_string($field->name, true, ['context' => $context]);
+            $options[self::PROFILE_PREFIX . $field->shortname] = format_string(
+                $field->name,
+                true,
+                ['context' => $context, 'escape' => false]
+            );
         }
         return $options;
     }
@@ -72,7 +76,7 @@ class department {
         if (str_starts_with($setting, self::PROFILE_PREFIX)) {
             $field = $DB->get_record('user_info_field', ['shortname' => substr($setting, strlen(self::PROFILE_PREFIX))]);
             if ($field && in_array($field->datatype, self::PROFILE_TYPES)) {
-                $name = format_string($field->name, true, ['context' => \context_system::instance()]);
+                $name = format_string($field->name, true, ['context' => \context_system::instance(), 'escape' => false]);
                 return (object)['name' => $name, 'userfield' => '', 'profilefieldid' => (int)$field->id];
             }
         }
