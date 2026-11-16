@@ -124,6 +124,15 @@ class dashboard {
     }
 
     /**
+     * End of the period.
+     *
+     * @return int
+     */
+    public function get_to(): int {
+        return $this->to;
+    }
+
+    /**
      * The course of the dashboard.
      *
      * @return int 0 for all courses.

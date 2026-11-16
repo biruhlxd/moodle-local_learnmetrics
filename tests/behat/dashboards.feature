@@ -69,3 +69,14 @@ Feature: See the learning dashboards
     And I should see "0% completed"
     And I should see "Student One"
     And I should not see "Teacher One" in the "region-main" "region"
+
+  Scenario: A teacher sees where learners drop off
+    Given the following "activities" exist:
+      | activity | name          | course | completion |
+      | page     | Safety basics | C1     | 1          |
+    And I am on the "C1" "local_learnmetrics > Course dashboard" page logged in as "teacher1"
+    When I follow "Course insight: where learners drop off"
+    Then I should see "Completion funnel"
+    And I should see "Safety basics"
+    And I should see "Biggest drop"
+    And I should see "Activities nobody opened"

@@ -143,6 +143,7 @@ $template = [
     'inactivedays' => dashboard::INACTIVE_DAYS,
     'activities' => $activities,
     'completionurl' => (new moodle_url('/local/learnmetrics/completion.php', ['id' => $course->id]))->out(false),
+    'insighturl' => (new moodle_url('/local/learnmetrics/insight.php', ['id' => $course->id, 'days' => $days]))->out(false),
     'hasactivities' => !empty($activities),
     'packages' => $packages,
     'haspackages' => !empty($packages),
