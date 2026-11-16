@@ -15,3 +15,12 @@
     background-color: var(--bs-body-bg, #fff);
     white-space: nowrap;
 }
+
+/* Completion funnel: the percentages line up beside the bars. */
+.local-learnmetrics-funnel .progress {
+    min-width: 6rem;
+}
+
+.local-learnmetrics-funnel-percent {
+    min-width: 3rem;
+}

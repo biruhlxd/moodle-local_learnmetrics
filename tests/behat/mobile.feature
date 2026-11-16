@@ -45,6 +45,9 @@ Feature: Use the learning dashboards on a phone
     When I am on the "IPC" "local_learnmetrics > Course dashboard" page logged in as "teacher1"
     Then I should see "Views per activity"
     And the main region should fit the window width
+    And I follow "Course insight: where learners drop off"
+    And I should see "Completion funnel"
+    And the main region should fit the window width
 
   Scenario: The progress page of a learner fits a phone screen
     Given I log in as "student1"

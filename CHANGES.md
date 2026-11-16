@@ -1,5 +1,10 @@
 # Changes
 
+## 1.2.0 (2026-11-16)
+
+- Course insight, linked from the course dashboard: the completion funnel (the activities with completion tracking in course order, the learners who completed each one and the drop since the activity before, with the biggest drop marked) and the activities no learner opened in the period.
+- New hook `insight_output`: other plugins can add sections to the course insight page.
+
 ## 1.1.1 (2026-11-15)
 
 - Fixed: names with an ampersand, such as "Health & Safety", were shown as "Health &amp;amp; Safety" on the dashboards, the completion grid, the learning progress page, in the filters and in downloads. This applies to the names of courses, activities, categories, cohorts and the department field.
