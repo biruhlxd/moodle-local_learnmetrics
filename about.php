@@ -27,7 +27,8 @@ require_once($CFG->libdir . '/adminlib.php');
 
 admin_externalpage_setup('local_learnmetrics_about');
 
-$plugin = core_plugin_manager::instance()->get_plugin_info('local_learnmetrics');
+$plugin = new stdClass();
+require(__DIR__ . '/version.php');
 [$from, $to] = $plugin->supported;
 $repository = 'https://github.com/biruhlxd/moodle-local_learnmetrics';
 
