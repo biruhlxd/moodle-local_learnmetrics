@@ -54,7 +54,7 @@ A dashboard's figures can be extended with the same learners: `dashboard::get_sc
 | Hooks | `classes/hook/` |
 | Privacy | `classes/privacy/provider.php`: export and deletion per course (learning time, unprocessed pings) and per user (last action); observers remove data of deleted users, courses and activities |
 
-Settings: Site administration → Plugins → Local plugins → LearnMetrics (session gap, days of past activity on installation, count time on open pages, learner roles, count site administrators, department field).
+Settings: Site administration → Plugins → Local plugins → LearnMetrics → Settings (session gap, days of past activity on installation, count time on open pages, learner roles, count site administrators, department field).
 
 ## Upgrading from before 1.0
 

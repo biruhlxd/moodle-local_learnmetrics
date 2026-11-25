@@ -1,0 +1,45 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_learnmetrics/about
+
+    About LearnMetrics: release, maintainer, documentation and support.
+
+    Example context (json):
+    {
+        "details": "Installed release: 1.2.0 · Supported Moodle: 5.0–5.3 · GNU GPL v3 or later",
+        "maintainer": [{"url": "https://biruh.org/", "name": "Biruh Alemnew, website"}],
+        "support": [{"url": "#", "name": "Documentation"}, {"url": "#", "name": "Report an issue or request a feature"}]
+    }
+}}
+<h3>{{#str}} about_heading, local_learnmetrics {{/str}}</h3>
+<p>{{#str}} about_intro, local_learnmetrics {{/str}}</p>
+<p>{{details}}</p>
+
+<h3>{{#str}} about_maintainer, local_learnmetrics {{/str}}</h3>
+<ul>
+    {{#maintainer}}
+    <li><a href="{{url}}" target="_blank" rel="noopener">{{name}}</a></li>
+    {{/maintainer}}
+</ul>
+
+<h3>{{#str}} about_support, local_learnmetrics {{/str}}</h3>
+<ul>
+    {{#support}}
+    <li><a href="{{url}}" target="_blank" rel="noopener">{{name}}</a></li>
+    {{/support}}
+</ul>

@@ -32,8 +32,14 @@ $ADMIN->add('reports', new admin_externalpage(
 ));
 
 if ($hassiteconfig) {
-    $settings = new admin_settingpage('local_learnmetrics', get_string('pluginname', 'local_learnmetrics'));
-    $ADMIN->add('localplugins', $settings);
+    $ADMIN->add('localplugins', new admin_category('local_learnmetrics_category', get_string('pluginname', 'local_learnmetrics')));
+    $settings = new admin_settingpage('local_learnmetrics', get_string('settings'));
+    $ADMIN->add('local_learnmetrics_category', $settings);
+    $ADMIN->add('local_learnmetrics_category', new admin_externalpage(
+        'local_learnmetrics_about',
+        get_string('about', 'local_learnmetrics'),
+        new moodle_url('/local/learnmetrics/about.php')
+    ));
     if ($ADMIN->fulltree) {
         $settings->add(new admin_setting_configduration(
             'local_learnmetrics/sessiongap',

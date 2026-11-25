@@ -24,6 +24,17 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['about'] = 'About';
+$string['about_changes'] = 'Changes in each release';
+$string['about_details'] = 'Installed release: {$a->release} · Supported Moodle: {$a->moodle} · GNU GPL v3 or later';
+$string['about_documentation'] = 'Documentation';
+$string['about_heading'] = 'About LearnMetrics';
+$string['about_intro'] = 'LearnMetrics measures learning time and shows it on dashboards, a learning progress page and Report builder sources, entirely inside Moodle. It is made and maintained by Biruh Alemnew.';
+$string['about_issues'] = 'Report an issue or request a feature';
+$string['about_licence'] = 'GNU GPL v3 or later licence';
+$string['about_maintainer'] = 'Maintainer';
+$string['about_support'] = 'Documentation and support';
+$string['about_website'] = 'Biruh Alemnew, website';
 $string['actions'] = 'Actions';
 $string['activedays'] = 'Active days';
 $string['activelearners'] = 'Active learners';

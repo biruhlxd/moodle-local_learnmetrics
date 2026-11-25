@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.0 (2026-11-25)
+
+- About page (Site administration → Plugins → Local plugins → LearnMetrics → About): the installed release, the supported Moodle versions, the maintainer's website and links to the documentation, issues and changes. The settings page moved into the same LearnMetrics category; its address is unchanged.
+
 ## 1.2.0 (2026-11-16)
 
 - Course insight, linked from the course dashboard: the completion funnel (the activities with completion tracking in course order, the learners who completed each one and the drop since the activity before, with the biggest drop marked) and the activities no learner opened in the period.
