@@ -244,8 +244,8 @@ function xmldb_local_learnmetrics_upgrade($oldversion) {
     }
 
     if ($oldversion < 2026111000) {
-        // Scheduled reports, compliance, alerts, engagement and the other paid features moved to LearnMetrics Pro. Their
-        // tables stay as they are, unused, until LearnMetrics Pro is installed and copies them. The permissions of the
+        // Scheduled reports, compliance, alerts, engagement and the other features that left this plugin in 1.0. Their
+        // tables stay as they are, unused, until a plugin that provides them is installed and copies them. The permissions of the
         // moved capabilities are kept here for it, as Moodle removes them with the capabilities after this step.
         [$insql, $params] = $DB->get_in_or_equal(['local/learnmetrics:manageschedules', 'local/learnmetrics:managecompliance']);
         $permissions = $DB->get_records_select(
@@ -259,8 +259,8 @@ function xmldb_local_learnmetrics_upgrade($oldversion) {
             set_config('movedcapabilities', json_encode(array_values($permissions)), 'local_learnmetrics');
         }
 
-        // The notification preferences of the moved messages, of users and the site defaults, are renamed for LearnMetrics
-        // Pro, as Moodle deletes the preferences of messages a plugin no longer has after this step.
+        // The notification preferences of the moved messages, of users and the site defaults, are renamed for the plugin that
+        // provides them, as Moodle deletes the preferences of messages a plugin no longer has after this step.
         foreach (['atrisklearner', 'atriskteacher', 'compliancereminder'] as $provider) {
             $old = "_provider_local_learnmetrics_{$provider}_";
             $new = "_provider_local_learnmetricspro_{$provider}_";
